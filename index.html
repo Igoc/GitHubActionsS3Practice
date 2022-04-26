@@ -43,7 +43,18 @@
 
     <script>
         function save() {
-            alert('파일 업로드 완료!');
+            let formData = new FormData($('#upload-file')[0]);
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://spartaebpractice-env.eba-gp8yt5ap.ap-northeast-2.elasticbeanstalk.com/upload',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert('파일 업로드 완료!');
+                }
+            });
         }
     </script>
 </head>
