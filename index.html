@@ -68,7 +68,7 @@
                 type: 'GET',
                 url: 'http://spartaebpractice-env.eba-gp8yt5ap.ap-northeast-2.elasticbeanstalk.com/file-count',
                 success: function (response) {
-                    $('#file-count').text(response.data);
+                    $('#file-count').text(response['data']);
                 }
             });
         }
