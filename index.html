@@ -43,6 +43,7 @@
 
     <script>
         $(document).ready(function () {
+            getFileCount();
             getFiles();
         });
 
@@ -58,6 +59,16 @@
                 success: function () {
                     alert('파일 업로드 완료!');
                     location.reload();
+                }
+            });
+        }
+
+        function getFileCount() {
+            $.ajax({
+                type: 'GET',
+                url: 'http://spartaebpractice-env.eba-gp8yt5ap.ap-northeast-2.elasticbeanstalk.com/file-count',
+                success: function (response) {
+                    $('#file-count').text(response.data);
                 }
             });
         }
@@ -87,25 +98,33 @@
     </script>
 </head>
 <body>
-    <div class="wrap">
-        <div class="jumbotron">
-            <h1 class="display-4">나홀로 이미지 메모장!</h1>
-            <p class="lead">중요한 이미지를 저장해두고, 나중에 볼 수 있는 공간입니다</p>
-            <hr class="my-4">
-        </div>
-        <div id="post-box" class="form-post">
-            <div>
-                <div class="form-group">
-                    <form id="upload-file">
-                        <label>이미지 파일</label>
-                        <input type="file" name="file"/>
-                    </form>
-                </div>
-                <button type="button" class="btn btn-primary" onclick="save()">저장</button>
+<div class="wrap">
+    <div class="jumbotron">
+        <h1 class="display-4">나홀로 이미지 메모장!</h1>
+        <p class="lead">중요한 이미지를 저장해두고, 나중에 볼 수 있는 공간입니다</p>
+        <hr class="my-4">
+    </div>
+
+    <div id="post-box" class="form-post">
+        <div>
+            <div class="form-group">
+                <form id="upload-file">
+                    <label>이미지 파일</label>
+                    <input type="file" name="file"/>
+                </form>
             </div>
-        </div>
-        <div id="cards-box" class="card-columns">
+            <button type="button" class="btn btn-primary" onclick="save()">저장</button>
         </div>
     </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-brand">
+            총 파일 갯수: <span id="file-count"></span>
+        </div>
+    </nav>
+
+    <div id="cards-box" class="card-columns">
+    </div>
+</div>
 </body>
 </html>
